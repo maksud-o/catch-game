@@ -20,13 +20,14 @@ namespace Caught.Game.Items
             _rb = GetComponent<Rigidbody2D>();
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (collision.gameObject.CompareTag(GameInfo.BoardTag))
+            if (other.gameObject.CompareTag(GameInfo.BoardTag))
             {
                 OnCaughtAction();
+                AudioService.Instance.PlayOneShot(_soundOnCatch);
             }
-            else if (collision.gameObject.CompareTag(GameInfo.FallColliderTag))
+            else if (other.gameObject.CompareTag(GameInfo.FallColliderTag))
             {
                 OnFallAction();
             }
@@ -35,7 +36,6 @@ namespace Caught.Game.Items
                 return;
             }
 
-            AudioService.Instance.PlayOneShot(_soundOnCatch);
             Destroy(gameObject);
         }
 

@@ -26,6 +26,12 @@ namespace Caught.UI.Game
             SetupLives();
         }
 
+        private void OnDestroy()
+        {
+            _playerStatsController.OnLivesAdded -= LivesAddedCallback;
+            _playerStatsController.OnLivesRemoved -= LivesRemovedCallback;
+        }
+
         #endregion
 
         #region Private methods
