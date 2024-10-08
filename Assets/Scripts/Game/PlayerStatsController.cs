@@ -9,7 +9,7 @@ namespace Caught.Game
         #region Variables
 
         [Header("Lives Settings")]
-        [SerializeField] private int _maxLives = 3;
+        [SerializeField] private int _maxLives = 5;
         [SerializeField] private int _startingLives = 3;
 
         private int _lives;

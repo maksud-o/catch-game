@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6698f61fd214c61a649e9a51e4516f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLives: 3
+  _maxLives: 5
   _startingLives: 3
 --- !u!1001 &1021131861
 PrefabInstance:
@@ -1924,7 +1924,6 @@ Transform:
   m_Children:
   - {fileID: 1011270324}
   - {fileID: 1096941719}
-  - {fileID: 2110898366}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1821457878
@@ -2131,51 +2130,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4477433387647830946, guid: 98db3daa08603be4e858a85bc5b813ea, type: 3}
   m_PrefabInstance: {fileID: 1992547230}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2110898365
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2110898366}
-  - component: {fileID: 2110898367}
-  m_Layer: 0
-  m_Name: ItemsSpeedupService
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2110898366
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110898365}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1666898356}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2110898367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110898365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc004ef363cf458cb12bd3c79dd78fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemsSpeedupInterval: 7
 --- !u!224 &1169199922165296648
 RectTransform:
   m_ObjectHideFlags: 0

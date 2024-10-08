@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Caught.Services;
+using UnityEngine;
 
 namespace Caught.Game.Items
 {
@@ -7,6 +8,7 @@ namespace Caught.Game.Items
     {
         #region Variables
 
+        [SerializeField] private AudioClip _soundOnCatch;
         private Rigidbody2D _rb;
 
         #endregion
@@ -33,6 +35,7 @@ namespace Caught.Game.Items
                 return;
             }
 
+            AudioService.Instance.PlayOneShot(_soundOnCatch);
             Destroy(gameObject);
         }
 
