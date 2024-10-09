@@ -21,7 +21,7 @@ namespace Caught.UI.Game
         private void Restart()
         {
             SceneService.ResetActiveScene();
-            PauseService.Unpause();
+            PauseService.Instance.Unpause();
         }
 
         #endregion

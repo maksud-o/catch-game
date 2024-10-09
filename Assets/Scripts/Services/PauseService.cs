@@ -1,24 +1,25 @@
-﻿using UnityEngine;
+﻿using Caught.Game;
+using UnityEngine;
 
 namespace Caught.Services
 {
-    public static class PauseService
+    public  class PauseService : SingletonMonoBehaviour<PauseService>
     {
         #region Properties
 
-        public static bool IsPaused { get; private set; }
+        public bool IsPaused { get; private set; }
 
         #endregion
 
         #region Public methods
 
-        public static void Pause()
+        public void Pause()
         {
             Time.timeScale = 0;
             IsPaused = true;
         }
 
-        public static void Unpause()
+        public void Unpause()
         {
             Time.timeScale = 1;
             IsPaused = false;

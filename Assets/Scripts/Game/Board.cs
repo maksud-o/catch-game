@@ -26,7 +26,7 @@ namespace Caught.Game
 
         private void Update()
         {
-            if (!PauseService.IsPaused)
+            if (!PauseService.Instance. IsPaused)
             {
                 MoveAlongPointer();
                 ClampXWithinScreen();

@@ -1,6 +1,6 @@
 ﻿namespace Caught.Game
 {
-    public static class GameInfo
+    public static class GameTags
     {
         #region Variables
 

@@ -1,4 +1,4 @@
-﻿using Caught.Game;
+﻿using Caught.Services.Game;
 using TMPro;
 using UnityEngine;
 
@@ -9,15 +9,21 @@ namespace Caught.UI.Game
         #region Variables
 
         [SerializeField] private TextMeshProUGUI _scoreText;
-        [SerializeField] private PlayerStatsController _playerStatsController;
 
         #endregion
 
         #region Unity lifecycle
 
-        private void Awake()
+        private void Start()
         {
-            _playerStatsController.OnScoreChanged += OnScoreChangedCallback;
+            PlayerStatsService.Instance.OnScoreChanged += OnScoreChangedCallback;
+
+            _scoreText.text = PlayerStatsService.Instance.Score.ToString();
+        }
+
+        private void OnDestroy()
+        {
+            PlayerStatsService.Instance.OnScoreChanged -= OnScoreChangedCallback;
         }
 
         #endregion
@@ -26,7 +32,7 @@ namespace Caught.UI.Game
 
         private void OnScoreChangedCallback()
         {
-            _scoreText.text = _playerStatsController.Score.ToString();
+            _scoreText.text = PlayerStatsService.Instance.Score.ToString();
         }
 
         #endregion

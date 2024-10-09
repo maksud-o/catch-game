@@ -23,7 +23,7 @@ namespace Caught.UI.Game
         private void ToMenu()
         {
             SceneService.LoadScene(_menuSceneName);
-            PauseService.Unpause();
+            PauseService.Instance.Unpause();
         }
 
         #endregion

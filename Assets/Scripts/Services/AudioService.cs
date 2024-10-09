@@ -3,7 +3,7 @@
 namespace Caught.Services
 {
     [RequireComponent(typeof(AudioSource))]
-    public class AudioService : MonoBehaviour
+    public class AudioService : SingletonMonoBehaviour<AudioService>
     {
         #region Variables
 
@@ -11,29 +11,21 @@ namespace Caught.Services
 
         #endregion
 
-        #region Properties
-
-        public static AudioService Instance { get; private set; }
-
-        #endregion
-
-        #region Unity lifecycle
-
-        private void Awake()
-        {
-            _audioSource = GetComponent<AudioSource>();
-            
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-            }
-
-            Instance = this;
-        }
+        #region Public methods
 
         public void PlayOneShot(AudioClip clip)
         {
             _audioSource.PlayOneShot(clip);
+        }
+
+        #endregion
+
+        #region Protected methods
+
+        protected override void AwakeAddition()
+        {
+            base.AwakeAddition();
+            _audioSource = gameObject.GetComponent<AudioSource>();
         }
 
         #endregion

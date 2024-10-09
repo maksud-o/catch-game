@@ -22,12 +22,12 @@ namespace Caught.Game.Items
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag(GameInfo.BoardTag))
+            if (other.gameObject.CompareTag(GameTags.BoardTag))
             {
                 OnCaughtAction();
                 AudioService.Instance.PlayOneShot(_soundOnCatch);
             }
-            else if (other.gameObject.CompareTag(GameInfo.FallColliderTag))
+            else if (other.gameObject.CompareTag(GameTags.FallColliderTag))
             {
                 OnFallAction();
             }

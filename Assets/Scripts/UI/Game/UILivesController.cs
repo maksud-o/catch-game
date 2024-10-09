@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Caught.Game;
+using Caught.Services.Game;
 using UnityEngine;
 
 namespace Caught.UI.Game
@@ -10,7 +10,6 @@ namespace Caught.UI.Game
 
         [SerializeField] private GameObject _livesContainer;
         [SerializeField] private GameObject _lifePrefab;
-        [SerializeField] private PlayerStatsController _playerStatsController;
 
         private GameObject[] _lives;
 
@@ -18,40 +17,41 @@ namespace Caught.UI.Game
 
         #region Unity lifecycle
 
-        private void Awake()
+        private void Start()
         {
-            _playerStatsController.OnLivesAdded += LivesAddedCallback;
-            _playerStatsController.OnLivesRemoved += LivesRemovedCallback;
+            PlayerStatsService.Instance.OnLivesChanged += LivesChangedCallback;
 
             SetupLives();
         }
 
         private void OnDestroy()
         {
-            _playerStatsController.OnLivesAdded -= LivesAddedCallback;
-            _playerStatsController.OnLivesRemoved -= LivesRemovedCallback;
+            PlayerStatsService.Instance.OnLivesChanged -= LivesChangedCallback;
         }
 
         #endregion
 
         #region Private methods
 
-        private void LivesAddedCallback(int amount)
+        private void ChangeLives(int amount)
         {
-            GameObject[] inactiveLives = _lives.Where(l => !l.activeSelf).ToArray();
+            bool isAdded = amount > 0;
+            amount = Mathf.Abs(amount);
+            GameObject[] lives = _lives.Where(l => l.activeSelf == !isAdded).ToArray();
+            if (lives.Length == 0)
+            {
+                return;
+            }
+
             for (var i = 0; i < amount; i++)
             {
-                inactiveLives[i].SetActive(true);
+                lives[i].SetActive(isAdded);
             }
         }
 
-        private void LivesRemovedCallback(int amount)
+        private void LivesChangedCallback(int amount)
         {
-            GameObject[] activeLives = _lives.Where(l => l.activeSelf).ToArray();
-            for (var i = 0; i < amount; i++)
-            {
-                activeLives[i].SetActive(false);
-            }
+            ChangeLives(amount);
         }
 
         private void SetupLives()
@@ -61,12 +61,14 @@ namespace Caught.UI.Game
                 DestroyImmediate(_livesContainer.transform.GetChild(0).gameObject);
             }
 
-            _lives = new GameObject[_playerStatsController.MaxLives];
+            _lives = new GameObject[PlayerStatsService.Instance.MaxLives];
             for (var i = 0; i < _lives.Length; i++)
             {
                 _lives[i] = Instantiate(_lifePrefab, _livesContainer.transform);
                 _lives[i].SetActive(false);
             }
+
+            ChangeLives(PlayerStatsService.Instance.StartingLives);
         }
 
         #endregion

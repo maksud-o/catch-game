@@ -1,20 +1,14 @@
-﻿using System;
+﻿using Caught.Services.Game;
 
 namespace Caught.Game.Items
 {
     public class NegativeItem : Item
     {
-        #region Events
-
-        public static event Action<int> OnCaught;
-
-        #endregion
-
         #region Protected methods
 
         protected override void OnCaughtAction()
         {
-            OnCaught?.Invoke(-1);
+            PlayerStatsService.Instance.ChangeScore(-1);
         }
 
         #endregion

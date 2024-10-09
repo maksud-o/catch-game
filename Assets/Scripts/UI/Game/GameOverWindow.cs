@@ -1,24 +1,23 @@
-﻿using Caught.Game;
-using Caught.Services;
+﻿using Caught.Services;
+using Caught.Services.Game;
 using UnityEngine;
 
 namespace Caught.UI.Game
 {
     public class GameOverWindow : MonoBehaviour
     {
-        #region Variables
-
-        [SerializeField] private PlayerStatsController _playerStatsController;
-
-        #endregion
-
         #region Unity lifecycle
 
-        private void Awake()
+        private void Start()
         {
-            _playerStatsController.OnZeroLives += ActivateWindow;
+            PlayerStatsService.Instance.OnGameOver += ActivateWindow;
 
             gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            PlayerStatsService.Instance.OnGameOver -= ActivateWindow;
         }
 
         #endregion
@@ -28,7 +27,7 @@ namespace Caught.UI.Game
         private void ActivateWindow()
         {
             gameObject.SetActive(true);
-            PauseService.Pause();
+            PauseService.Instance.Pause();
         }
 
         #endregion
